@@ -1,4 +1,4 @@
-name: Mirror Upstream (Force Except Workflows Ads Index README Posts)
+name: Mirror Upstream (Force Except Workflows Ads Index)
 
 on:
   schedule:
@@ -24,11 +24,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Save local workflows ads index README and posts
+      - name: Save local workflows ads and index
         run: |
           mkdir -p /tmp/workflows
           mkdir -p /tmp/ads
-          mkdir -p /tmp/posts
 
           if [ -d ".github/workflows" ]; then
             cp -r .github/workflows /tmp/workflows/
@@ -38,33 +37,23 @@ jobs:
             cp -r _includes/ads /tmp/ads/
           fi
 
-          if [ -d "_posts/xxx" ]; then
-            cp -r _posts/xxx /tmp/posts/
-          fi
-
           if [ -f "index.html" ]; then
             cp index.html /tmp/index.html
           fi
 
-          if [ -f "README.md" ]; then
-            cp README.md /tmp/README.md
-          fi
-
       - name: Add upstream
         run: |
-          git remote remove upstream 2>/dev/null || true
-          git remote add upstream https://github.com/nengmaya538/nengmaya538.github.io.git
+          git remote add upstream https://github.com/yusierni7/ngaloco.git
           git fetch upstream
 
       - name: Hard reset to upstream
         run: |
           git reset --hard upstream/master
 
-      - name: Restore workflows ads index README and posts
+      - name: Restore workflows ads and index
         run: |
           rm -rf .github/workflows
           rm -rf _includes/ads
-          rm -rf _posts/xxx
 
           if [ -d "/tmp/workflows/workflows" ]; then
             mkdir -p .github
@@ -76,27 +65,12 @@ jobs:
             cp -r /tmp/ads/ads _includes/
           fi
 
-          if [ -d "/tmp/posts/xxx" ]; then
-            mkdir -p _posts
-            cp -r /tmp/posts/xxx _posts/
-          fi
-
           if [ -f "/tmp/index.html" ]; then
             cp /tmp/index.html index.html
-          fi
-
-          if [ -f "/tmp/README.md" ]; then
-            cp /tmp/README.md README.md
           fi
 
       - name: Force push to fork
         run: |
           git add .
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-
-          git commit -m "Force sync except workflows ads index README and _posts/xxx"
+          git commit -m "Force sync except workflows ads and index" || echo "No changes"
           git push origin master --force

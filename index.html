@@ -1,665 +1,937 @@
 ---
 layout: null
 ---
-
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-language" content="en">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
     
-    <meta name="juicyads-site-verification" content="58cf721cb52745d8ffa0a2e74fd7ffc0">
-    <script>
-    (function() {
-        var hostname = location.hostname;
-        var parts = hostname.split(".");
-        var fullName = parts[0];
-        if (fullName.toLowerCase() === "www") fullName = parts[1] || fullName;
-        var formatText = function(str) {
-            return str.replace(/[-_]/g, " ").replace(/\+/g, " ").replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-        };
-        var displayDomain = formatText(fullName);
-        document.title = displayDomain + " - Beautiful Girls Photo Gallery";
-        var metaDesc = document.querySelector("meta[name=\"description\"]") || document.createElement("meta");
-        metaDesc.name = "description";
-        metaDesc.content = displayDomain + " - Stunning collection of beautiful girls photography from around the world.";
-        if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
-        var metaAuthor = document.querySelector("meta[name=\"author\"]") || document.createElement("meta");
-        metaAuthor.name = "author";
-        metaAuthor.content = displayDomain;
-        if (!metaAuthor.parentNode) document.head.appendChild(metaAuthor);
-        var canonical = document.querySelector("link[rel=\"canonical\"]") || document.createElement("link");
-        canonical.setAttribute("rel", "canonical");
-        canonical.setAttribute("href", location.href);
-        if (!canonical.parentNode) document.head.appendChild(canonical);
-        var schemaData = {"@context":"https://schema.org","@type":"WebSite","name":displayDomain,"description":"Beautiful girls photo gallery from around the world","url":location.origin};
-        var schemaScript = document.createElement("script");
-        schemaScript.type = "application/ld+json";
-        schemaScript.textContent = JSON.stringify(schemaData);
-        document.head.appendChild(schemaScript);
-    })();
-    </script>
-
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-
+    <!-- Canonical link dinamis akan diisi oleh JavaScript -->
+    <link rel="canonical" id="dynamic-canonical" href="">
+    
+    <title id="dynamic-title">Digital Forensics Unit | Evidence Archive</title>
+    <meta id="dynamic-description" name="description" content="Digital forensics evidence archive. Data breach documentation, leaked content repository, and forensic analysis.">
+    
     <style>
-        /* ===== RESET & BASE ===== */
-        *,*::before,*::after{box-sizing:border-box}
-        html{overflow-x:hidden;background:var(--bg-color)}
-        body{
-            width:100%;min-width:320px;max-width:100%;margin:0;padding:0;
-            background:var(--bg-color);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-            color:var(--text-color);line-height:1.3;-webkit-font-smoothing:antialiased;
-        }
-
-        /* Light / Dark Theme Variables */
+        /* ============================================
+            GLOBAL COLOR VARIABLES - MUDAH DIEDIT
+           ============================================ */
         :root {
-            --bg-color: #050505;
-            --header-bg: rgba(5,5,5,.97);
-            --text-color: #fff;
-            --border-color: rgba(255,255,255,.08);
-            --menu-bg: #1a1a1a;
-            --menu-border: #333;
-            --menu-text: #ccc;
-            --menu-hover-bg: #2a2a2a;
-            --card-bg: #0a0a0a;
-            --ad-bg: #080808;
-            --desc-color: rgba(255,255,255,.65);
-            --btn-bg: rgba(255,255,255,.05);
-            --btn-border: rgba(255,255,255,.1);
-            --icon-fill: #fff;
-            --icon-stroke: #fff;
-            --section-title: #fff;
-            --featured-title: #ff6b6b;
+            --color-bg: #0a0c12;
+            --color-bg-card: #0e1118;
+            --color-bg-hover: #121620;
+            --color-text-primary: #c0c4d0;
+            --color-text-secondary: #5a6e8a;
+            --color-text-accent: #e0e4f0;
+            --color-accent: #4a9eff;
+            --color-accent-dark: #2a5f8a;
+            --color-border: #2a2f3f;
+            --color-border-light: #1e222c;
+            --color-highlight-bg: #1a2a3a;
+            --color-redacted: #2a2f3f;
+            --font-mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
         }
 
-        body.light-mode {
-            --bg-color: #f5f5f7;
-            --header-bg: rgba(245,245,247,.97);
-            --text-color: #1d1d1f;
-            --border-color: rgba(0,0,0,.08);
-            --menu-bg: #ffffff;
-            --menu-border: #e5e5e5;
-            --menu-text: #1d1d1f;
-            --menu-hover-bg: #f0f0f0;
-            --card-bg: #ffffff;
-            --ad-bg: #eaeaea;
-            --desc-color: rgba(0,0,0,.55);
-            --btn-bg: rgba(0,0,0,.05);
-            --btn-border: rgba(0,0,0,.1);
-            --icon-fill: #1d1d1f;
-            --icon-stroke: #1d1d1f;
-            --section-title: #1d1d1f;
-            --featured-title: #d32f2f;
+        /* TECH NOIR / DIGITAL FORENSIC STYLE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        /* ===== HEADER ===== */
-        .site-header{
-            width:100%;position:fixed;top:0;left:0;z-index:1000;
-            background:var(--header-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-            border-bottom:1px solid var(--border-color);
-            padding:12px 12px;
-        }
-        .header-inner{
-            display:flex;align-items:center;gap:10px;max-width:1280px;margin:0 auto;
-        }
-        .site-avatar{flex-shrink:0;line-height:0}
-        .site-avatar svg{width:34px;height:34px}
-        .site-title{
-            flex:1;font-size:16px;font-weight:700;letter-spacing:.3px;
-            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-color);
-        }
-        .menu-btn, .theme-btn{
-            width:42px;height:42px;flex-shrink:0;
-            background:var(--btn-bg);border:1px solid var(--btn-border);
-            cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;
-            border-radius:50%;transition:all .2s ease;
-        }
-        .menu-btn:active, .theme-btn:active{background:rgba(255,255,255,.12);transform:scale(.95)}
-        .menu-btn svg, .theme-btn svg{width:22px;height:22px;stroke:var(--icon-stroke);fill:none;stroke-width:2;stroke-linecap:round}
-
-        .slide-menu{
-            display:none;position:fixed;top:58px;right:8px;z-index:999;
-            background:var(--menu-bg);border:1px solid var(--menu-border);border-radius:14px;padding:6px;
-            min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.6);
-        }
-        .slide-menu.open{display:block}
-        .slide-menu ul{list-style:none;margin:0;padding:0}
-        .slide-menu li+li{border-top:1px solid rgba(255,255,255,.04)}
-        .slide-menu a{
-            display:flex;align-items:center;gap:8px;padding:13px 16px;color:var(--menu-text);text-decoration:none;
-            font-size:15px;font-weight:500;border-radius:10px;transition:all .15s ease;
-        }
-        .slide-menu a svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
-        .slide-menu a:active{background:var(--menu-hover-bg);color:var(--text-color)}
-
-        /* ===== DESKTOP NAV (hidden di mobile) ===== */
-        .desktop-nav{display:none}
-        .desktop-nav a{
-            display:inline-flex;align-items:center;gap:6px;
-        }
-        .desktop-nav a svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
-
-        /* ===== AD CONTAINER ===== */
-        .ad-box{
-            display:flex;justify-content:center;align-items:center;
-            margin:0 auto;max-width:100%;overflow:hidden;
-            background:var(--ad-bg);min-height:50px;
-        }
-        .ad-box ins{max-width:100%}
         
-        /* Responsive ad visibility */
-        .ad-desktop{display:none}
-        .ad-mobile{display:flex}
-        .ad-both{display:flex}
-
-        /* ===== AD BREAK (top & bottom) ===== */
-        .ad-break{
-            padding:12px 0;background:var(--ad-bg);
-            border-top:1px solid var(--border-color);
-            border-bottom:1px solid var(--border-color);
+        body {
+            font-family: var(--font-mono);
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.5;
         }
-        .ad-break:first-child{margin-top:58px}
-
-        /* ===== AD INLINE (antar section) ===== */
-        .ad-inline{
-            margin:24px 0;padding:12px 0;
-            background:var(--ad-bg);
-            border-top:1px solid var(--border-color);
-            border-bottom:1px solid var(--border-color);
+        
+        /* CONTAINER - FORENSIC PANEL */
+        .forensic-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
         }
-
-        /* ===== MAIN LAYOUT ===== */
-        .main-layout{
-            display:flex;flex-direction:column;gap:0;width:100%;max-width:1280px;
-            margin:0 auto;padding:0;
+        
+        /* HEADER - EVIDENCE LABEL */
+        .evidence-header {
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        .content-area{flex:1;min-width:0;padding:0;width:100%}
-
-        .sidebar{display:none}
-        .sticky-ad{position:sticky;top:80px;display:flex;justify-content:center}
-
-        /* ============================
-           GV2 GALLERY SYSTEM
-           ============================ */
-        .gv2-section{margin:20px 0}
-        .gv2-section:first-child{margin-top:4px}
-        .gv2-title{padding:0 8px;margin:0 auto 10px;max-width:1400px}
-        .gv2-title h2{
-            margin:0;font-size:19px;font-weight:800;color:var(--section-title);letter-spacing:.2px;
-            display:flex;align-items:center;gap:8px;
+        
+        .case-number {
+            font-size: 0.7rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .gv2-title h2 svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;}
-        .gv2-featured-title h2{color:var(--featured-title)}
-        .gv2-grid{max-width:1400px;margin:auto;padding:0;gap:0}
-
-        /* === MOBILE: 1 KOLOM FULLWIDTH === */
-        .gv2-featured{display:grid;grid-template-columns:1fr;gap:4px}
-        .gv2-latest{display:grid;grid-template-columns:1fr;gap:4px}
-        .gv2-stories{display:grid;grid-template-columns:1fr;gap:4px}
-        .gv2-tutorials{display:grid;grid-template-columns:1fr;gap:4px}
-        .gv2-archive{display:grid;grid-template-columns:1fr;gap:4px}
-
-        .gv2-featured-big,
-        .gv2-featured-small{
-            grid-column:auto;grid-row:auto;
+        
+        .evidence-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-text-accent);
+            margin-top: 0.25rem;
         }
-
-        /* Card */
-        .gv2-card{
-            position:relative;overflow:hidden;border-radius:0;background:var(--card-bg);
-            -webkit-tap-highlight-color:transparent;
+        
+        .evidence-badge {
+            display: inline-block;
+            background: #1e2a3a;
+            color: var(--color-accent);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            border-radius: 2px;
+            margin-top: 0.5rem;
         }
-        .gv2-card-link{
-            display:block;width:100%;
+        
+        /* BREADCRUMB - FORENSIC PATH */
+        .forensic-path {
+            font-size: 0.7rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            font-family: monospace;
         }
-        .gv2-card-link img{
-            width:100%;height:100%;object-fit:cover;display:block;
-            transition:transform .3s ease;aspect-ratio:16/9;
+        
+        .forensic-path a {
+            color: var(--color-accent);
+            text-decoration: none;
         }
-        .gv2-card-link:active img{transform:scale(1.02)}
-
-        /* Card body (di luar link) - disembunyikan karena tidak ada judul */
-        .gv2-card-body{
-            display:none;
+        
+        .forensic-path a:hover {
+            text-decoration: underline;
         }
-        .gv2-card-title-link{
-            display:none;
+        
+        .forensic-path span {
+            color: var(--color-text-accent);
         }
-        .gv2-card-desc{
-            display:none;
+        
+        /* TYPOGRAPHY */
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            font-family: monospace;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            border-left: 3px solid var(--color-accent);
+            padding-left: 1rem;
+            word-break: break-word;
         }
-
-        .excerpt{display:none}
-
-        /* ============================
-           TABLET (min-width:600px)
-           ============================ */
-        @media(min-width:600px){
-            .ad-desktop{display:flex}
-            .ad-mobile{display:none}
-            .ad-both{display:flex}
-
-            .site-header{padding:12px 16px}
-            .site-title{font-size:17px}
-            .ad-break{padding:16px 0}
-            .ad-break:first-child{margin-top:60px}
-            .ad-inline{margin:28px 0;padding:14px 0}
-            .gv2-title{padding:0 12px}
-            .gv2-title h2{font-size:22px}
-            .gv2-grid{padding:0 8px;gap:6px}
-
-            .gv2-featured{grid-template-columns:1fr 1fr;gap:6px}
-            .gv2-featured-big{grid-column:1 / -1}
-            .gv2-latest{grid-template-columns:1fr 1fr;gap:6px}
-            .gv2-stories{grid-template-columns:1fr 1fr;gap:6px}
-            .gv2-tutorials{grid-template-columns:1fr 1fr;gap:6px}
-            .gv2-archive{grid-template-columns:1fr 1fr;gap:6px}
-
-            .gv2-card{border-radius:6px}
-            .gv2-card-link img{aspect-ratio:9/16}
+        
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-accent);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
         }
-
-        /* ============================
-           DESKTOP (min-width:900px)
-           ============================ */
-        @media(min-width:900px){
-            body{max-width:1280px;margin:0 auto}
-
-            .site-header{
-                left:50%;transform:translateX(-50%);max-width:1280px;
-                padding:12px 20px;
-            }
-            .site-title{font-size:15px;font-weight:600;color:var(--menu-text)}
-            .menu-btn{display:none}
-            .slide-menu{display:none!important}
-
-            .ad-break:first-child{margin-top:62px}
-
-            .main-layout{flex-direction:row;padding:0 8px}
-            .sidebar{display:block;flex-shrink:0;padding:16px 8px;position:relative}
-            .sidebar-left{width:160px;border-right:1px solid var(--border-color)}
-            .sidebar-right{width:160px;border-left:1px solid var(--border-color)}
-
-            .gv2-section{margin:32px 0}
-            .gv2-section:first-child{margin-top:8px}
-            .gv2-title{padding:0 14px}
-            .gv2-title h2{font-size:22px}
-            .gv2-grid{padding:0 14px;gap:10px}
-
-            .gv2-featured{
-                grid-template-columns:2fr 1fr 1fr;
-                grid-template-rows:1fr 1fr;gap:10px;
-            }
-            .gv2-featured-big{
-                grid-column:1 / 2;grid-row:1 / 3;
-            }
-            .gv2-featured-big .gv2-card-link img{aspect-ratio:auto;height:100%}
-            .gv2-featured-small{grid-column:auto;grid-row:auto}
-            .gv2-featured-small .gv2-card-link img{aspect-ratio:9/16}
-
-            .gv2-latest{grid-template-columns:repeat(5,1fr);gap:10px}
-            .gv2-stories{grid-template-columns:repeat(4,1fr);gap:10px}
-            .gv2-tutorials{grid-template-columns:repeat(3,1fr);gap:10px}
-            .gv2-archive{grid-template-columns:repeat(6,1fr);gap:10px}
-
-            .gv2-card{border-radius:12px}
-            .gv2-card:hover .gv2-card-link img{transform:scale(1.05)}
-
-            /* Desktop nav: muncul */
-            .desktop-nav{
-                display:flex;gap:4px;padding:0 14px;max-width:1400px;margin:0 auto 8px;
-            }
-            .desktop-nav a{
-                padding:6px 12px;color:var(--menu-text);text-decoration:none;font-size:13px;
-                border-radius:6px;transition:all .15s ease;
-            }
-            .desktop-nav a:hover{color:var(--text-color);background:var(--menu-hover-bg)}
+        
+        h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: var(--color-text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-
-        /* ============================
-           LARGE DESKTOP (min-width:1100px)
-           ============================ */
-        @media(min-width:1100px){
-            .sidebar-left{width:180px}
-            .sidebar-right{width:180px}
-            .gv2-grid{gap:12px}
-            .gv2-featured{gap:12px}
-            .gv2-latest{gap:12px}
-            .gv2-stories{gap:12px}
-            .gv2-tutorials{gap:12px}
-            .gv2-archive{gap:12px}
+        
+        .forensic-lead {
+            background: var(--color-bg-card);
+            border-left: 3px solid var(--color-accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #a0a8c0;
+        }
+        
+        /* EVIDENCE GRID */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .evidence-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .evidence-card:hover {
+            border-color: var(--color-accent);
+            background: var(--color-bg-hover);
+        }
+        
+        .evidence-tag {
+            font-size: 0.6rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .evidence-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .evidence-meta {
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .evidence-link {
+            font-size: 0.7rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--color-accent);
+        }
+        
+        .evidence-link:hover {
+            color: #7abaff;
+        }
+        
+        /* STATS - FORENSIC METRICS */
+        .forensic-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-metric {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            font-family: monospace;
+        }
+        
+        .stat-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-secondary);
+        }
+        
+        /* EVIDENCE LOG - TABLE STYLE */
+        .evidence-log {
+            margin: 1rem 0;
+        }
+        
+        .log-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--color-border-light);
+            font-size: 0.8rem;
+        }
+        
+        .log-name a {
+            color: var(--color-text-primary);
+            text-decoration: none;
+        }
+        
+        .log-name a:hover {
+            color: var(--color-accent);
+        }
+        
+        .log-hash {
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            font-family: monospace;
+        }
+        
+        /* FAQ - INTERROGATION STYLE */
+        .interrogation {
+            margin: 1.5rem 0;
+        }
+        
+        .interrogation-item {
+            border-bottom: 1px solid var(--color-border-light);
+            padding: 1rem 0;
+        }
+        
+        .interrogation-q {
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+            color: var(--color-accent);
+        }
+        
+        .interrogation-a {
+            font-size: 0.75rem;
+            color: #8a92a8;
+            line-height: 1.5;
+        }
+        
+        /* TAGS - EVIDENCE CLASSIFICATION */
+        .evidence-class {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .class-tag {
+            background: #1a1e28;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.65rem;
+            font-family: monospace;
+            color: var(--color-text-secondary);
+        }
+        
+        /* LINKS */
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* DIVIDER */
+        hr {
+            margin: 2rem 0;
+            border: none;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        /* FOOTER - CASE CLOSED */
+        .case-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.65rem;
+            color: var(--color-text-secondary);
+            text-align: center;
+        }
+        
+        /* UTILITY */
+        .hidden {
+            display: none;
+        }
+        
+        .query-highlight {
+            color: var(--color-accent);
+            font-weight: 700;
+            background: var(--color-highlight-bg);
+            padding: 0 0.2rem;
+        }
+        
+        .default-content.active {
+            display: block;
+        }
+        
+        .default-content {
+            display: none;
+        }
+        
+        .redacted {
+            background: var(--color-redacted);
+            color: transparent;
+            text-shadow: none;
+            padding: 0 0.2rem;
+        }
+        
+        @media (max-width: 700px) {
+            .forensic-container { padding: 1rem; }
+            h1 { font-size: 1.3rem; }
+            .evidence-grid { grid-template-columns: 1fr; }
         }
     </style>
-    
-{% include head.html %}
-{% include verif.html %}
 
-</head>
-<body>
-{% include /kw/p/edition-a/edition-a01.html%}
-    <!-- HEADER -->
-    <header class="site-header">
-        <div class="header-inner">
-            <div id="domainAvatar" class="site-avatar"></div>
-            <span id="blogMainTitle" class="site-title"></span>
-            <button class="theme-btn" id="themeToggle" aria-label="Toggle Theme">
-                <!-- Sun Icon -->
-                <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                </svg>
-                <!-- Moon Icon -->
-                <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
-            <button class="menu-btn" id="blogMenuToggle" aria-label="Menu">
-                <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-                <svg viewBox="0 0 24 24" style="display:none"><path d="M6 6l12 12M6 18l12-12"/></svg>
-            </button>
+  {% include head.html %}
+  
+  <meta name="juicyads-site-verification" content="ddb17a7f0ec8abbc59523f107c985887">
+  
+  </head>
+<body><div loading="lazy">
+   <nav>
+{% include /kw/p/docs.html %}
+{% include /kw/p/explore.html %}
+</nav>
+
+ <div class="forensic-container">
+        <!-- EVIDENCE HEADER -->
+        <div class="evidence-header">
+            <div class="case-number">DIGITAL FORENSICS UNIT · EVIDENCE LOCKER · CASE FILE #DF-2026-03</div>
+            <div class="evidence-title">⟡ DATA BREACH ARCHIVE ⟡ LEAKED CONTENT REPOSITORY ⟡ FORENSIC EVIDENCE</div>
+            <div class="evidence-badge">CLASSIFIED · RESTRICTED ACCESS · FORENSIC PRESERVATION</div>
         </div>
-    </header>
-
-    <!-- SLIDE MENU -->
-    <nav id="blogMenuPanel" class="slide-menu">
-        <ul>
-            <li><a href="/"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a></li>
-            <li><a href="/contact/"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Contact</a></li>
-            <li><a href="/privacy-policy/"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Privacy Policy</a></li>
-            <li><a href="/terms-and-conditions/"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Terms & Conditions</a></li>
-        </ul>
-    </nav>
-
-    <script>
-    (function(){
-        var host = window.location.hostname.split(".");
-        var sub = host[0];
-        if (sub.toLowerCase() === "www") sub = host[1] || "";
-        var clean = sub.replace(/-/g, " ");
-        document.getElementById("blogMainTitle").textContent = clean.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-    })();
-    (function(){
-        var btn = document.getElementById("blogMenuToggle");
-        var panel = document.getElementById("blogMenuPanel");
-        var menuIcon = btn.querySelector("svg:first-child");
-        var closeIcon = btn.querySelector("svg:last-child");
-        btn.addEventListener("click", function(e){
-            e.stopPropagation();
-            var open = panel.classList.toggle("open");
-            menuIcon.style.display = open ? "none" : "block";
-            closeIcon.style.display = open ? "block" : "none";
-        });
-        document.addEventListener("click", function(e){
-            if(!panel.contains(e.target) && !btn.contains(e.target)){
-                panel.classList.remove("open");
-                menuIcon.style.display = "block";
-                closeIcon.style.display = "none";
-            }
-        });
-        panel.addEventListener("click", function(e){
-            e.stopPropagation();
-        });
-    })();
-    </script>
-
-    <!-- Theme Toggle Script -->
+        
+        <main>
+            <!-- ============================================
+                 DEFAULT CONTENT (tampil jika tidak ada query)
+                 ============================================ -->
+            <div id="default-content" class="default-content active">
+                <div class="forensic-path">
+                    <a href="/">[ROOT]</a> / <span>EVIDENCE_LOCKER</span>
+                </div>
+                
+                <h1>DIGITAL EVIDENCE ARCHIVE</h1>
+                <div class="forensic-lead">
+                    Forensic preservation of leaked digital assets · Data breach documentation · Unauthorized distribution evidence · Complete chain of custody maintained.
+                </div>
+                
+                <div class="forensic-stats">
+                    <div class="stat-metric"><div class="stat-value">2,548</div><div class="stat-label">EVIDENCE FILES</div></div>
+                    <div class="stat-metric"><div class="stat-value">447</div><div class="stat-label">IMAGE SETS</div></div>
+                    <div class="stat-metric"><div class="stat-value">123</div><div class="stat-label">VIDEO FILES</div></div>
+                    <div class="stat-metric"><div class="stat-value">ACTIVE</div><div class="stat-label">CASE STATUS</div></div>
+                </div>
+                
+                <h2>EVIDENCE CATALOGS</h2>
+                <div class="evidence-grid">
+                    <div class="evidence-card">
+                        <div class="evidence-tag">[CAT-01]</div>
+                        <div class="evidence-name">IMAGE EVIDENCE · LEAKED PHOTO SETS</div>
+                        <div class="evidence-meta">447 files · Multiple sources</div>
+                        <a href="/model/?q=photo+leaks" class="evidence-link">ACCESS EVIDENCE →</a>
+                    </div>
+                    <div class="evidence-card">
+                        <div class="evidence-tag">[CAT-02]</div>
+                        <div class="evidence-name">VIDEO EVIDENCE · PRIVATE RECORDINGS</div>
+                        <div class="evidence-meta">123 files · Original quality</div>
+                        <a href="/model/?q=video+leaks" class="evidence-link">ACCESS EVIDENCE →</a>
+                    </div>
+                    <div class="evidence-card">
+                        <div class="evidence-tag">[CAT-03]</div>
+                        <div class="evidence-name">DOCUMENT EVIDENCE · DATA BREACH</div>
+                        <div class="evidence-meta">Complete documentation</div>
+                        <a href="/model/?q=exclusive+leaks" class="evidence-link">ACCESS EVIDENCE →</a>
+                    </div>
+                    <div class="evidence-card">
+                        <div class="evidence-tag">[CAT-04]</div>
+                        <div class="evidence-name">FORENSIC ANALYSIS · ORIGIN TRACING</div>
+                        <div class="evidence-meta">Chain of custody</div>
+                        <a href="/model/?q=rare+leaks" class="evidence-link">ACCESS EVIDENCE →</a>
+                    </div>
+                </div>
+                
+                <div class="case-footer">
+                    DIGITAL FORENSICS UNIT · EVIDENCE INTEGRITY VERIFIED · CHAIN OF CUSTODY MAINTAINED
+                </div>
+            </div>
+            
+            <!-- ============================================
+                 QUERY-BASED CONTENT (FORENSIC STYLE)
+                 ============================================ -->
+            <div id="query-content" style="display: none;">
+                <!-- FORENSIC PATH DENGAN QUERY -->
+                <div class="forensic-path">
+                    <a href="/">[ROOT]</a> / <a href="/model/">EVIDENCE_LOCKER</a> / <span id="breadcrumb-name"></span>
+                </div>
+                
+                <!-- H1 DENGAN QUERY + SUBDOMAIN/DOMAIN (WAJIB PALING ATAS) -->
+                <h1 id="main-heading"></h1>
+                
+                <!-- FORENSIC LEAD DENGAN QUERY -->
+                <div class="forensic-lead" id="forensic-lead">
+                    <span id="lead-query"></span> — Forensic evidence package. Complete digital forensics documentation including leaked image sets, private video recordings, and data breach evidence. Chain of custody verified.
+                </div>
+                
+                <!-- EVIDENCE CLASSIFICATION TAGS -->
+                <div class="evidence-class">
+                    <span class="class-tag" id="tag1"></span>
+                    <span class="class-tag" id="tag2"></span>
+                    <span class="class-tag" id="tag3"></span>
+                    <span class="class-tag" id="tag4"></span>
+                    <span class="class-tag">FORENSIC PRESERVATION</span>
+                </div>
+                
+                <!-- ============================================ -->
+                <!-- H2 DAN H3 DINAMIS AKAN MUNCUL DI BAWAH INI      -->
+                <!-- ============================================ -->
+                
+                <!-- INTRO VARIAN - FORENSIC STYLE -->
+                <div id="intro-leak" class="intro-varian hidden">
+                    <div class="forensic-stats" id="leak-stats">
+                        <div class="stat-metric"><div class="stat-value" id="leak-photo-count">447+</div><div class="stat-label" id="leak-photo-label"></div></div>
+                        <div class="stat-metric"><div class="stat-value" id="leak-video-count">123+</div><div class="stat-label" id="leak-video-label"></div></div>
+                        <div class="stat-metric"><div class="stat-value">COMPLETE</div><div class="stat-label">EVIDENCE CHAIN</div></div>
+                    </div>
+                    
+                    <h2>📁 EVIDENCE CATALOG A · LEAKED IMAGE SETS</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="leaked+photos" id="link-photo-master"></a></span><span class="log-hash">SHA-256: COMPLETE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="rare+leaks" id="link-photo-rare"></a></span><span class="log-hash">EVIDENCE: LIMITED CIRCULATION</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="uncensored" id="link-photo-uncensored"></a></span><span class="log-hash">EVIDENCE: UNEDITED</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="professional+photoshoot" id="link-photo-studio"></a></span><span class="log-hash">EVIDENCE: UNRELEASED</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="candid" id="link-photo-candid"></a></span><span class="log-hash">EVIDENCE: PRIVATE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="behind+the+scenes" id="link-photo-bts"></a></span><span class="log-hash">EVIDENCE: PRODUCTION LEAK</span></div>
+                    </div>
+                    
+                    <h2>🎥 EVIDENCE CATALOG B · LEAKED VIDEO FOOTAGE</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="leaked+videos" id="link-video-master"></a></span><span class="log-hash">COMPLETE FOOTAGE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="performances" id="link-video-performances"></a></span><span class="log-hash">UNCUT RECORDINGS</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="interviews" id="link-video-interviews"></a></span><span class="log-hash">UNEDITED FOOTAGE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="exclusive+clips" id="link-video-exclusive"></a></span><span class="log-hash">PRIVATE SOURCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="rare+videos" id="link-video-rare"></a></span><span class="log-hash">LIMITED CIRCULATION</span></div>
+                    </div>
+                    
+                    <h2>🔒 EVIDENCE CATALOG C · EXCLUSIVE DATA DUMPS</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="private+collection" id="link-private"></a></span><span class="log-hash">PRIVATE COLLECTION</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="original+leaks" id="link-original"></a></span><span class="log-hash">SOURCE EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="unreleased" id="link-unreleased"></a></span><span class="log-hash">UNRELEASED MATERIALS</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="archive" id="link-archive"></a></span><span class="log-hash">COMPLETE EVIDENCE LOG</span></div>
+                    </div>
+                </div>
+                
+                <div id="intro-photo" class="intro-varian hidden">
+                    <div class="forensic-stats">
+                        <div class="stat-metric"><div class="stat-value">447+</div><div class="stat-label">EVIDENCE IMAGES</div></div>
+                        <div class="stat-metric"><div class="stat-value">12+</div><div class="stat-label">SOURCE ORIGINS</div></div>
+                        <div class="stat-metric"><div class="stat-value">8+</div><div class="stat-label">YEAR RANGE</div></div>
+                    </div>
+                    
+                    <h2>📸 EVIDENCE · IMAGE FORENSICS</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="professional+photoshoot" id="photo-studio"></a></span><span class="log-hash">STUDIO EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="candid" id="photo-candid"></a></span><span class="log-hash">CANDID EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="behind+the+scenes" id="photo-bts"></a></span><span class="log-hash">BTS EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="red+carpet" id="photo-redcarpet"></a></span><span class="log-hash">EVENT EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="magazine+shoot" id="photo-magazine"></a></span><span class="log-hash">EDITORIAL EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="rare+photos" id="photo-rare"></a></span><span class="log-hash">RARE EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="high+quality" id="photo-hq"></a></span><span class="log-hash">HIGH RESOLUTION</span></div>
+                    </div>
+                </div>
+                
+                <div id="intro-video" class="intro-varian hidden">
+                    <div class="forensic-stats">
+                        <div class="stat-metric"><div class="stat-value">123+</div><div class="stat-label">VIDEO FILES</div></div>
+                        <div class="stat-metric"><div class="stat-value">35+</div><div class="stat-label">INTERVIEWS</div></div>
+                        <div class="stat-metric"><div class="stat-value">40+</div><div class="stat-label">PERFORMANCES</div></div>
+                    </div>
+                    
+                    <h2>🎬 EVIDENCE · VIDEO FORENSICS</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="performances" id="video-performances"></a></span><span class="log-hash">LIVE EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="interviews" id="video-interviews"></a></span><span class="log-hash">INTERVIEW EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="behind+the+scenes+footage" id="video-bts"></a></span><span class="log-hash">BTS EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="exclusive+clips" id="video-exclusive"></a></span><span class="log-hash">EXCLUSIVE EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="rare+videos" id="video-rare"></a></span><span class="log-hash">RARE EVIDENCE</span></div>
+                    </div>
+                </div>
+                
+                <div id="intro-bio" class="intro-varian hidden">
+                    <div class="forensic-stats">
+                        <div class="stat-metric"><div class="stat-value">VERIFIED</div><div class="stat-label">SOURCE INTEGRITY</div></div>
+                        <div class="stat-metric"><div class="stat-value">COMPLETE</div><div class="stat-label">BIOGRAPHICAL DATA</div></div>
+                    </div>
+                    
+                    <h2>📄 EVIDENCE · PERSONAL DATA BREACH</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="early+life" id="bio-early"></a></span><span class="log-hash">BACKGROUND EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="age" id="bio-age"></a></span><span class="log-hash">AGE VERIFICATION</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="height" id="bio-height"></a></span><span class="log-hash">PHYSICAL DATA</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="relationships" id="bio-relationships"></a></span><span class="log-hash">RELATIONSHIP EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="net+worth" id="bio-networth"></a></span><span class="log-hash">FINANCIAL DATA</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="career" id="bio-career"></a></span><span class="log-hash">CAREER EVIDENCE</span></div>
+                    </div>
+                </div>
+                
+                <div id="intro-platform" class="intro-varian hidden">
+                    <h2>🌐 EVIDENCE · PLATFORM DATA BREACH</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="instagram" id="platform-ig"></a></span><span class="log-hash">INSTAGRAM DATA</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="facebook" id="platform-fb"></a></span><span class="log-hash">FACEBOOK BREACH</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="twitter" id="platform-twitter"></a></span><span class="log-hash">TWITTER/X EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="tiktok" id="platform-tt"></a></span><span class="log-hash">TIKTOK DATA</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="discord" id="platform-discord"></a></span><span class="log-hash">DISCORD EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="telegram" id="platform-telegram"></a></span><span class="log-hash">TELEGRAM CHANNELS</span></div>
+                    </div>
+                </div>
+                
+                <div id="intro-general" class="intro-varian hidden">
+                    <div class="forensic-stats">
+                        <div class="stat-metric"><div class="stat-value">COMPLETE</div><div class="stat-label">EVIDENCE PACKAGE</div></div>
+                        <div class="stat-metric"><div class="stat-value">VERIFIED</div><div class="stat-label">CHAIN OF CUSTODY</div></div>
+                    </div>
+                    
+                    <h2>📁 COMPLETE EVIDENCE MANIFEST</h2>
+                    <div class="evidence-log">
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="photos" id="general-photos"></a></span><span class="log-hash">IMAGE EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="videos" id="general-videos"></a></span><span class="log-hash">VIDEO EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="biography" id="general-bio"></a></span><span class="log-hash">BIOGRAPHICAL EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="exclusive" id="general-exclusive"></a></span><span class="log-hash">EXCLUSIVE EVIDENCE</span></div>
+                        <div class="log-entry"><span class="log-name"><a href="" class="dynamic-link" data-variant="leaked" id="general-leaked"></a></span><span class="log-hash">LEAKED EVIDENCE</span></div>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <!-- SECTION 1: CASE OVERVIEW (H2 sudah ada di atas, ini konten tambahan) -->
+                <h2>CASE FILE · EVIDENCE OVERVIEW</h2>
+                <div class="evidence-log">
+                    <div class="log-entry"><span>EVIDENCE SUBJECT:</span><span class="log-hash" id="case-subject"></span></div>
+                    <div class="log-entry"><span>CASE CLASSIFICATION:</span><span class="log-hash">DATA BREACH / LEAKED CONTENT</span></div>
+                    <div class="log-entry"><span>EVIDENCE STATUS:</span><span class="log-hash">PRESERVED · VERIFIED</span></div>
+                    <div class="log-entry"><span>CHAIN OF CUSTODY:</span><span class="log-hash">COMPLETE · UNBROKEN</span></div>
+                </div>
+                
+                <!-- SECTION 2: IMAGE EVIDENCE MANIFEST -->
+                <h2>📸 EVIDENCE MANIFEST A · IMAGE FORENSICS</h2>
+                <div class="evidence-log">
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="leaked+photos" id="manifest-photo-master"></a><span class="log-hash">MASTER EVIDENCE SET</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="professional+photoshoot" id="manifest-photo-studio"></a><span class="log-hash">STUDIO EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="candid" id="manifest-photo-candid"></a><span class="log-hash">CANDID EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="rare+photos" id="manifest-photo-rare"></a><span class="log-hash">RARE EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="uncensored" id="manifest-photo-uncensored"></a><span class="log-hash">UNCENSORED EVIDENCE</span></div>
+                </div>
+                
+                <!-- SECTION 3: VIDEO EVIDENCE MANIFEST -->
+                <h2>🎥 EVIDENCE MANIFEST B · VIDEO FORENSICS</h2>
+                <div class="evidence-log">
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="leaked+videos" id="manifest-video-master"></a><span class="log-hash">MASTER VIDEO SET</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="performances" id="manifest-video-performances"></a><span class="log-hash">PERFORMANCE EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="interviews" id="manifest-video-interviews"></a><span class="log-hash">INTERVIEW EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="exclusive+clips" id="manifest-video-exclusive"></a><span class="log-hash">EXCLUSIVE EVIDENCE</span></div>
+                </div>
+                
+                <!-- SECTION 4: DATA BREACH EVIDENCE -->
+                <h2>🔓 EVIDENCE MANIFEST C · DATA BREACH</h2>
+                <div class="evidence-log">
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="private+collection" id="manifest-private"></a><span class="log-hash">PRIVATE COLLECTION</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="original+leaks" id="manifest-original"></a><span class="log-hash">SOURCE EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="unreleased" id="manifest-unreleased"></a><span class="log-hash">UNRELEASED MATERIALS</span></div>
+                </div>
+                
+                <!-- SECTION 5: PLATFORM BREACH EVIDENCE -->
+                <h2>🌐 EVIDENCE MANIFEST D · PLATFORM BREACH</h2>
+                <iframe src="https://www.youtube.com/embed/Vg1byBgkxYg" loading="lazy" style="width:100%;aspect-ratio:9/16;border:0;" allow="fullscreen"></iframe>
+                <div class="evidence-log">
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="instagram" id="manifest-ig"></a><span class="log-hash">INSTAGRAM DATA</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="facebook" id="manifest-fb"></a><span class="log-hash">FACEBOOK BREACH</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="twitter" id="manifest-twitter"></a><span class="log-hash">TWITTER/X EVIDENCE</span></div>
+                    <div class="log-entry"><a href="" class="dynamic-link" data-variant="tiktok" id="manifest-tt"></a><span class="log-hash">TIKTOK DATA</span></div>
+                </div>
+                
+                <!-- SECTION 6: RELATED CASES -->
+                <h2>🔗 RELATED CASE FILES</h2>
+                <div class="evidence-log">
+                    <div class="log-entry"><a href="/model/?q=celebrity+leaks">CELEBRITY DATA BREACH ARCHIVE</a><span class="log-hash">CASE #DF-2024</span></div>
+                    <div class="log-entry"><a href="/model/?q=photo+leaks">IMAGE LEAK EVIDENCE</a><span class="log-hash">CASE #DF-2025</span></div>
+                    <div class="log-entry"><a href="/model/?q=video+leaks">VIDEO LEAK EVIDENCE</a><span class="log-hash">CASE #DF-2025-B</span></div>
+                    <div class="log-entry"><a href="/model/?q=exclusive+leaks">EXCLUSIVE DATA DUMP</a><span class="log-hash">CASE #DF-2026</span></div>
+                </div>
+                
+                <!-- SECTION 7: INTERROGATION (FAQ) -->
+                <h2>❓ INTERROGATION LOG · EVIDENCE INQUIRY</h2>
+                <div class="interrogation">
+                    <div class="interrogation-item"><div class="interrogation-q" id="faq-q1"></div><div class="interrogation-a" id="faq-a1"></div></div>
+                    <div class="interrogation-item"><div class="interrogation-q" id="faq-q2"></div><div class="interrogation-a" id="faq-a2"></div></div>
+                    <div class="interrogation-item"><div class="interrogation-q" id="faq-q3"></div><div class="interrogation-a" id="faq-a3"></div></div>
+                    <div class="interrogation-item"><div class="interrogation-q" id="faq-q4"></div><div class="interrogation-a" id="faq-a4"></div></div>
+                    <div class="interrogation-item"><div class="interrogation-q" id="faq-q5"></div><div class="interrogation-a" id="faq-a5"></div></div>
+                </div>
+                
+                <hr>
+                <center>{% include /ads/gobloggugel/nanouturfs.html %}</center>
+                <hr>
+                
+                <!-- SECTION 8: EVIDENCE INTEGRITY STATEMENT -->
+                <h2>🔐 EVIDENCE INTEGRITY STATEMENT</h2>
+                <div class="forensic-lead">
+                    This forensic evidence package for <strong id="integrity-subject"></strong> has been preserved with complete chain of custody documentation. All digital evidence maintained in original format. Hash verification available upon request.
+                </div>
+                <div class="case-footer">
+                    DIGITAL FORENSICS UNIT · EVIDENCE LOCKER · CASE ACTIVE · <span id="footer-subject"></span>
+                </div>
+            </div>
+        </main>
+    </div>
+    
     <script>
     (function() {
-        var body = document.body;
-        var themeBtn = document.getElementById('themeToggle');
-        var sunIcon = document.getElementById('sunIcon');
-        var moonIcon = document.getElementById('moonIcon');
-        
-        // Check saved theme
-        var savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light-mode');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
+        // ========================
+        // 1. CANONICAL LINK DINAMIS
+        // ========================
+        const canonicalLink = document.getElementById('dynamic-canonical');
+        if (canonicalLink) {
+            canonicalLink.href = window.location.href;
         }
         
-        themeBtn.addEventListener('click', function() {
-            body.classList.toggle('light-mode');
-            var isLight = body.classList.contains('light-mode');
-            
-            if (isLight) {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-                localStorage.setItem('theme', 'light');
-            } else {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-                localStorage.setItem('theme', 'dark');
+        // ========================
+        // 2. QUERY DAN SUBDOMAIN
+        // ========================
+        const urlParams = new URLSearchParams(window.location.search);
+        let query = urlParams.get('q');
+        
+        // Jika tidak ada query, tampilkan default content
+        if (!query) {
+            document.getElementById('default-content').classList.add('active');
+            return;
+        }
+        
+        // Sembunyikan default, tampilkan query content
+        document.getElementById('default-content').classList.remove('active');
+        document.getElementById('default-content').style.display = 'none';
+        document.getElementById('query-content').style.display = 'block';
+        
+        // Decode query
+        query = decodeURIComponent(query.replace(/\+/g, ' '));
+        
+        // Ambil subdomain/domain untuk identitas
+        let hostParts = window.location.hostname.split('.');
+        let subDomain = '';
+        let domain = '';
+        
+        if (hostParts.length >= 3) {
+            // Contoh: sub-domain.fazri.my
+            subDomain = hostParts[0];
+            domain = hostParts.slice(1).join('.');
+        } else {
+            // Contoh: fazri.my atau github.io / pages.dev
+            subDomain = '';
+            domain = window.location.hostname;
+        }
+        
+        // Format identitas untuk ditampilkan (tanpa TLD complex handling, cukup gunakan subdomain atau domain)
+        let identity = '';
+        if (subDomain && subDomain !== 'www') {
+            identity = subDomain;
+        } else {
+            // Untuk kasus seperti fazri.my, github.io, pages.dev
+            let mainPart = domain.split('.')[0];
+            // Kapitalisasi huruf pertama
+            identity = mainPart.charAt(0).toUpperCase() + mainPart.slice(1);
+        }
+        
+        // Pastikan identity tidak kosong
+        if (!identity) identity = 'Site';
+        
+        // ========================
+        // 3. FUNGSI MEMBUAT JUDUL BERDASARKAN QUERY + IDENTITY
+        //    Konsisten tapi bervariasi untuk setiap elemen
+        // ========================
+        function capitalizeWords(str) {
+            return str.replace(/\b\w/g, l => l.toUpperCase());
+        }
+        
+        const capitalizedQuery = capitalizeWords(query);
+        
+        // Variasi untuk <title>
+        const titleVariants = [
+            `${capitalizedQuery} on ${identity} | Digital Forensics Evidence`,
+            `${capitalizedQuery} — ${identity} Data Breach Archive`,
+            `${capitalizedQuery} | Forensic Locker — ${identity}`
+        ];
+        const chosenTitle = titleVariants[Math.floor(Math.random() * titleVariants.length)];
+        document.title = chosenTitle;
+        
+        // Variasi untuk <h1> (paling utama)
+        const h1Variants = [
+            `Forensic Evidence: ${capitalizedQuery} on ${identity}`,
+            `${capitalizedQuery} — Complete Case File from ${identity}`,
+            `Digital Forensics: ${capitalizedQuery} (${identity})`
+        ];
+        const h1Element = document.getElementById('main-heading');
+        if (h1Element) {
+            h1Element.textContent = h1Variants[Math.floor(Math.random() * h1Variants.length)];
+        }
+        
+        // Variasi untuk <h2> pertama (dalam intro varian nanti, tapi kita buat juga untuk judul dinamis lain)
+        // Karena h2 di dalam intro sudah memiliki teks tetap, kita akan mengubah beberapa h2 spesifik nanti di bawah.
+        // Untuk sekarang, kita buat fungsi untuk update h2 yang mengandung placeholder.
+        
+        // Update breadcrumb
+        const breadcrumbSpan = document.getElementById('breadcrumb-name');
+        if (breadcrumbSpan) breadcrumbSpan.textContent = `${capitalizedQuery.toUpperCase()} / ${identity.toUpperCase()}`;
+        
+        // Update lead query
+        const leadSpan = document.getElementById('lead-query');
+        if (leadSpan) leadSpan.textContent = `FORENSIC EVIDENCE: ${capitalizedQuery.toUpperCase()} — SOURCE: ${identity.toUpperCase()}`;
+        
+        // Update tags
+        const tagElements = ['tag1', 'tag2', 'tag3', 'tag4'];
+        tagElements.forEach((id, idx) => {
+            const el = document.getElementById(id);
+            if (el) {
+                if (idx === 0) el.textContent = `${capitalizedQuery.toUpperCase()}_LEAK`;
+                else if (idx === 1) el.textContent = `${capitalizedQuery.toUpperCase()}_DATA_BREACH`;
+                else if (idx === 2) el.textContent = `${capitalizedQuery.toUpperCase()}_EVIDENCE`;
+                else if (idx === 3) el.textContent = `CASE_${identity.toUpperCase()}`;
             }
         });
+        
+        // Update leak stats label
+        const leakPhotoLabel = document.getElementById('leak-photo-label');
+        const leakVideoLabel = document.getElementById('leak-video-label');
+        if (leakPhotoLabel) leakPhotoLabel.textContent = `${capitalizedQuery.toUpperCase()} LEAKED PHOTOS`;
+        if (leakVideoLabel) leakVideoLabel.textContent = `${capitalizedQuery.toUpperCase()} LEAKED VIDEOS`;
+        
+        // Update case subject
+        const caseSubject = document.getElementById('case-subject');
+        if (caseSubject) caseSubject.textContent = `${capitalizedQuery.toUpperCase()} (${identity.toUpperCase()})`;
+        
+        const integritySubject = document.getElementById('integrity-subject');
+        if (integritySubject) integritySubject.textContent = `${capitalizedQuery} (${identity})`;
+        
+        const footerSubject = document.getElementById('footer-subject');
+        if (footerSubject) footerSubject.textContent = `${capitalizedQuery} · ${identity}`;
+        
+        // Update FAQ dengan query + identity
+        const faqQ1 = document.getElementById('faq-q1');
+        if (faqQ1) faqQ1.textContent = `What evidence is available for ${capitalizedQuery} from ${identity}?`;
+        const faqA1 = document.getElementById('faq-a1');
+        if (faqA1) faqA1.innerHTML = `Complete forensic evidence package including <a href="#" class="dynamic-link" data-variant="leaked+photos">${capitalizedQuery} leaked photos</a>, <a href="#" class="dynamic-link" data-variant="leaked+videos">${capitalizedQuery} private videos</a>, and exclusive data breach documentation sourced from ${identity}.`;
+        
+        const faqQ2 = document.getElementById('faq-q2');
+        if (faqQ2) faqQ2.textContent = `Where can I access ${capitalizedQuery} leaked image evidence from ${identity}?`;
+        const faqA2 = document.getElementById('faq-a2');
+        if (faqA2) faqA2.innerHTML = `The <a href="#" class="dynamic-link" data-variant="leaked+photos">${capitalizedQuery} image evidence catalog</a> contains complete leaked photo sets with chain of custody documentation from ${identity}.`;
+        
+        const faqQ3 = document.getElementById('faq-q3');
+        if (faqQ3) faqQ3.textContent = `Is there ${capitalizedQuery} video evidence available from ${identity}?`;
+        const faqA3 = document.getElementById('faq-a3');
+        if (faqA3) faqA3.innerHTML = `Yes. The <a href="#" class="dynamic-link" data-variant="leaked+videos">${capitalizedQuery} video evidence archive</a> includes private recordings, performances, and interview footage related to ${identity}.`;
+        
+        const faqQ4 = document.getElementById('faq-q4');
+        if (faqQ4) faqQ4.textContent = `What is the source of ${capitalizedQuery} data breach evidence on ${identity}?`;
+        const faqA4 = document.getElementById('faq-a4');
+        if (faqA4) faqA4.innerHTML = `Evidence sourced from multiple data breaches, private server leaks, and underground distribution channels associated with ${identity}. Chain of custody maintained.`;
+        
+        const faqQ5 = document.getElementById('faq-q5');
+        if (faqQ5) faqQ5.textContent = `How is this forensic evidence from ${identity} preserved?`;
+        const faqA5 = document.getElementById('faq-a5');
+        if (faqA5) faqA5.innerHTML = `All evidence maintained in original format with hash verification. Complete integrity preservation protocol followed for ${identity} case files.`;
+        
+        // Update semua dynamic links dengan query + identity
+        function updateLinks() {
+            document.querySelectorAll('.dynamic-link').forEach(link => {
+                const variant = link.getAttribute('data-variant');
+                if (variant) {
+                    link.href = `/model/?q=${encodeURIComponent(capitalizedQuery + ' ' + variant + ' ' + identity)}`;
+                }
+            });
+        }
+        
+        // Update text content untuk link-link penting
+        function updateLinkTexts() {
+            const linkTextMappings = {
+                'link-photo-master': `📸 ${capitalizedQuery} LEAKED PHOTO SET · ${identity} MASTER`,
+                'link-photo-rare': `💎 ${capitalizedQuery} RARE LEAKED IMAGES · ${identity} LIMITED`,
+                'link-photo-uncensored': `⚠️ ${capitalizedQuery} UNCENSORED PHOTO · ${identity} EDITION`,
+                'link-photo-studio': `📷 ${capitalizedQuery} LEAKED STUDIO SHOOT · ${identity}`,
+                'link-photo-candid': `🎞️ ${capitalizedQuery} CANDID MOMENTS · ${identity} PRIVATE`,
+                'link-photo-bts': `🎬 ${capitalizedQuery} LEAKED BTS · ${identity} PRODUCTION`,
+                'link-video-master': `🎥 ${capitalizedQuery} COMPLETE VIDEO LEAK · ${identity}`,
+                'link-video-performances': `🎤 ${capitalizedQuery} LEAKED PERFORMANCES · ${identity}`,
+                'link-video-interviews': `🎙️ ${capitalizedQuery} LEAKED INTERVIEWS · ${identity}`,
+                'link-video-exclusive': `🔒 ${capitalizedQuery} EXCLUSIVE VIDEO · ${identity}`,
+                'link-video-rare': `💎 ${capitalizedQuery} RARE VIDEOS · ${identity}`,
+                'link-private': `🔐 ${capitalizedQuery} PRIVATE COLLECTION · ${identity}`,
+                'link-original': `💾 ${capitalizedQuery} ORIGINAL LEAK · ${identity}`,
+                'link-unreleased': `📀 ${capitalizedQuery} UNRELEASED · ${identity}`,
+                'link-archive': `📁 ${capitalizedQuery} COMPLETE MANIFEST · ${identity}`
+            };
+            
+            for (const [id, text] of Object.entries(linkTextMappings)) {
+                const element = document.getElementById(id);
+                if (element) element.textContent = text;
+            }
+        }
+        
+        updateLinks();
+        updateLinkTexts();
+        
+        // Update semua placeholder query
+        document.querySelectorAll('.query-placeholder').forEach(el => {
+            el.textContent = capitalizedQuery;
+        });
+        
+        // Tampilkan intro yang sesuai
+        const queryLower = query.toLowerCase();
+        let queryType = 'general';
+        if (queryLower.includes('leak') || queryLower.includes('leaked') || queryLower.includes('leaks')) queryType = 'leak';
+        else if (queryLower.includes('photo') || queryLower.includes('photos') || queryLower.includes('picture')) queryType = 'photo';
+        else if (queryLower.includes('video') || queryLower.includes('videos') || queryLower.includes('clip')) queryType = 'video';
+        else if (queryLower.includes('bio') || queryLower.includes('biography') || queryLower.includes('age')) queryType = 'bio';
+        else if (queryLower.includes('instagram') || queryLower.includes('facebook') || queryLower.includes('twitter')) queryType = 'platform';
+        
+        document.querySelectorAll('.intro-varian').forEach(el => el.classList.add('hidden'));
+        const introElement = document.getElementById(`intro-${queryType}`);
+        if (introElement) introElement.classList.remove('hidden');
+        
+        // ========================
+        // 4. UPDATE H2 DAN H3 DINAMIS (SUPAYA MENGANDUNG QUERY)
+        //    Kita cari semua h2 dan h3 di dalam #query-content dan modifikasi isinya agar mengandung query + identity
+        //    Namun tidak mengubah struktur asli, hanya menambah atau mengganti kata kunci.
+        // ========================
+        const queryContainer = document.getElementById('query-content');
+        if (queryContainer) {
+            // Update semua h2
+            const allH2 = queryContainer.querySelectorAll('h2');
+            allH2.forEach(h2 => {
+                let originalText = h2.innerHTML;
+                // Hindari duplikasi jika sudah mengandung query
+                if (!originalText.includes(capitalizedQuery) && !originalText.toLowerCase().includes(query.toLowerCase())) {
+                    // Tambahkan query di depan atau di belakang dengan gaya konsisten
+                    h2.innerHTML = `${capitalizedQuery} · ${originalText}`;
+                }
+                // Tambahkan identity jika belum ada
+                if (!originalText.includes(identity)) {
+                    h2.innerHTML = `${h2.innerHTML} (${identity})`;
+                }
+            });
+            
+            // Update semua h3
+            const allH3 = queryContainer.querySelectorAll('h3');
+            allH3.forEach(h3 => {
+                let originalText = h3.innerHTML;
+                if (!originalText.includes(capitalizedQuery) && !originalText.toLowerCase().includes(query.toLowerCase())) {
+                    h3.innerHTML = `${capitalizedQuery} — ${originalText}`;
+                }
+                if (!originalText.includes(identity)) {
+                    h3.innerHTML = `${h3.innerHTML} [${identity}]`;
+                }
+            });
+        }
+        
+        // Update meta description juga
+        const metaDesc = document.getElementById('dynamic-description');
+        if (metaDesc) {
+            metaDesc.setAttribute('content', `${capitalizedQuery} forensic evidence from ${identity}. Complete data breach documentation including leaked images, private videos, and exclusive content. Digital forensics archive with verified chain of custody.`);
+        }
+        
     })();
     </script>
 
+<br />
+<iframe src="https://www.youtube.com/embed/mLlRFr0VCBs" loading="lazy" style="width:100%;aspect-ratio:9/16;border:0;" allow="fullscreen"></iframe>
+<br /><br />
 
-    <!-- ==================== BANNER 06: TOP ==================== -->
-    <div class="ad-break">
-        <div class="ad-box ad-desktop">
-            {% include /ads/banner/06.html %}
-        </div>
-        <div class="ad-box ad-mobile">
-            {% include /ads/banner/04.html %}
-        </div>
-    </div>
 
-    <!-- DESKTOP NAV -->
-    <nav class="desktop-nav">
-        <a href="/"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
-        <a href="/contact/"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Contact</a>
-        <a href="/privacy-policy/"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Privacy Policy</a>
-        <a href="/terms-and-conditions/"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Terms & Conditions</a>
-    </nav>
+{% include /ads/gobloggugel/default.html %}
+{% include footer.html %}
 
-    <!-- MAIN LAYOUT -->
-    <div class="main-layout">
 
-        <!-- LEFT SIDEBAR: Banner 05 -->
-        <aside class="sidebar sidebar-left">
-            <div class="sticky-ad">
-                {% include /ads/banner/05.html %}
-            </div>
-        </aside>
 
-        <!-- MAIN CONTENT -->
-        <main class="content-area">
-
-            <!-- ========== FEATURED ========== -->
-            {% assign featured_posts = site.posts | slice: 0, 5 %}
-            {% if featured_posts.size >= 5 %}
-            <section class="gv2-section">
-                <div class="gv2-title gv2-featured-title">
-                    <h2>
-                        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                        Featured
-                    </h2>
-                </div>
-                <div class="gv2-grid gv2-featured">
-                    {% for post in featured_posts %}
-                    <article class="gv2-card {% if forloop.first %}gv2-featured-big{% else %}gv2-featured-small{% endif %}">
-                        <a href="{{ post.url }}" class="gv2-card-link">
-                            {% if post.image %}
-                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
-                            {% endif %}
-                        </a>
-                    </article>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
-
-            <!-- ========== BANNER 01: SETELAH FEATURED ========== -->
-            <div class="ad-inline">
-                <div class="ad-box ad-desktop">
-                    {% include /ads/banner/01.html %}
-                </div>
-                <div class="ad-box ad-mobile">
-                    {% include /ads/banner/04.html %}
-                </div>
-            </div>
-
-            <!-- ========== LATEST ========== -->
-            {% assign latest_posts = site.posts | slice: 5, 5 %}
-            {% if latest_posts.size > 0 %}
-            <section class="gv2-section">
-                <div class="gv2-title">
-                    <h2>
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        Latest
-                    </h2>
-                </div>
-                <div class="gv2-grid gv2-latest">
-                    {% for post in latest_posts %}
-                    <article class="gv2-card">
-                        <a href="{{ post.url }}" class="gv2-card-link">
-                            {% if post.image %}
-                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
-                            {% endif %}
-                        </a>
-                    </article>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
-
-            <!-- ========== BANNER 02: SETELAH LATEST ========== -->
-            <div class="ad-inline">
-                <div class="ad-box ad-both">
-                    {% include /ads/banner/02.html %}
-                </div>
-            </div>
-
-            <!-- ========== STORIES ========== -->
-            {% assign stories_posts = site.posts | slice: 10, 4 %}
-            {% if stories_posts.size > 0 %}
-            <section class="gv2-section">
-                <div class="gv2-title">
-                    <h2>
-                        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                        Stories
-                    </h2>
-                </div>
-                <div class="gv2-grid gv2-stories">
-                    {% for post in stories_posts %}
-                    <article class="gv2-card">
-                        <a href="{{ post.url }}" class="gv2-card-link">
-                            {% if post.image %}
-                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
-                            {% endif %}
-                        </a>
-                    </article>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
-
-            <!-- ========== BANNER 03: SETELAH STORIES ========== -->
-            <div class="ad-inline">
-                <div class="ad-box ad-both">
-                    {% include /ads/banner/03.html %}
-                </div>
-            </div>
-
-            <!-- ========== POPULAR ========== -->
-            {% assign popular_posts = site.posts | slice: 14, 6 %}
-            {% if popular_posts.size > 0 %}
-            <section class="gv2-section">
-                <div class="gv2-title">
-                    <h2>
-                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        Popular
-                    </h2>
-                </div>
-                <div class="gv2-grid gv2-tutorials">
-                    {% for post in popular_posts %}
-                    <article class="gv2-card">
-                        <a href="{{ post.url }}" class="gv2-card-link">
-                            {% if post.image %}
-                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
-                            {% endif %}
-                        </a>
-                    </article>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
-
-            <!-- ========== BANNER 08: SETELAH POPULAR ========== -->
-            <div class="ad-inline">
-                <div class="ad-box ad-both">
-                    {% include /ads/banner/08.html %}
-                </div>
-            </div>
-
-            <!-- ========== ARCHIVE ========== -->
-            {% assign archive_posts = site.posts | slice: 20, 5 %}
-            {% if archive_posts.size > 0 %}
-            <section class="gv2-section">
-                <div class="gv2-title">
-                    <h2>
-                        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                        Archive
-                    </h2>
-                </div>
-                <div class="gv2-grid gv2-archive">
-                    {% for post in archive_posts %}
-                    <article class="gv2-card">
-                        <a href="{{ post.url }}" class="gv2-card-link">
-                            {% if post.image %}
-                                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
-                            {% endif %}
-                        </a>
-                    </article>
-                    {% endfor %}
-                </div>
-            </section>
-            {% endif %}
-
-        </main>
-
-        <!-- RIGHT SIDEBAR: Banner 05 -->
-        <aside class="sidebar sidebar-right">
-            <div class="sticky-ad">
-                {% include /ads/banner/05.html %}
-            </div>
-        </aside>
-
-    </div>
-
-    <!-- ==================== BANNER 07: BOTTOM ==================== -->
-    <div class="ad-break">
-        <div class="ad-box ad-desktop">
-            {% include /ads/banner/07.html %}
-        </div>
-        <div class="ad-box ad-mobile">
-            {% include /ads/banner/04.html %}
-        </div>
-    </div>
-
-    <!-- AVATAR SCRIPT -->
-    <script>
-    (function() {
-        var hostname = window.location.hostname;
-        var parts = hostname.split(".");
-        var fullName = parts[0];
-        if (fullName.toLowerCase() === "www") fullName = parts[1] || fullName;
-        function h(s) {var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return Math.abs(h);}
-        var dh = h(fullName);
-        var clean = fullName.replace(/-/g," ");
-        var w = clean.split(" "), init = "";
-        for (var i=0;i<Math.min(w.length,3);i++){if(w[i].length>0)init+=w[i].charAt(0).toUpperCase();}
-        if(init.length<2)init=fullName.substring(0,3).toUpperCase();
-        document.getElementById("domainAvatar").innerHTML = "<svg width=\"34\" height=\"34\" viewBox=\"0 0 34 34\"><rect width=\"34\" height=\"34\" rx=\"17\" fill=\"hsl("+(dh%360)+",60%,50%)\"/><text x=\"17\" y=\"23\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"14\" font-weight=\"bold\" font-family=\"sans-serif\">"+init+"</text></svg>";
-    })();
-    </script>
-
-    
-    {% include /ads/gobloggugel/default.html %}
-    {% include footer.html %}
-
-    
-</body>
+</div></body>
 </html>
+    
